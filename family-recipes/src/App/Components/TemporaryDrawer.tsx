@@ -1,96 +1,89 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import IconButton from '@material-ui/core/IconButton';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
 
-
-const useStyles = makeStyles((theme: Theme) => createStyles({
+//#region Classes
+const useStyles = (theme: Theme) => createStyles({
     menuButton: {
         marginRight: theme.spacing(2),
     },
     list: {
+        paddingTop: theme.spacing(1),
         width: 250,
     },
     fullList: {
         width: 'auto',
     },
-}));
+});
+//#endregion Classes
 
+//#region Types
 type Anchor = 'top' | 'left' | 'bottom' | 'right';
-type TempDrawerProps = { anchor: Anchor };
-
-export default function TemporaryDrawer(props: TempDrawerProps) {
-    const classes = useStyles();
-    const [state, setState] = React.useState({
-        top: false,
-        left: false,
-        bottom: false,
-        right: false,
-    });
-
-    const toggleDrawer = (anchor: Anchor, open: boolean) => (
-        event: React.KeyboardEvent | React.MouseEvent,
-    ) => {
-        if (
-            event &&
-            event.type === 'keydown' &&
-            ((event as React.KeyboardEvent).key === 'Tab' ||
-                (event as React.KeyboardEvent).key === 'Shift')
-        ) {
-            return;
-        }
-
-        setState({ ...state, [anchor]: open });
-    };
-
-    const list = (anchor: Anchor) => (
-        <div
-            className={clsx(classes.list, {
-                [classes.fullList]: anchor === 'top' || anchor === 'bottom',
-            })}
-            role="presentation"
-            onClick={toggleDrawer(anchor, false)}
-            onKeyDown={toggleDrawer(anchor, false)}
-        >
-            <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
-            </List>
-            <Divider />
-            <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
-            </List>
-        </div>
-    );
-
-    return (
-        <div>
-            <React.Fragment key={props.anchor}>
-                <IconButton onClick={toggleDrawer(props.anchor, true)} edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                    <MenuIcon />
-                </IconButton>
-                <SwipeableDrawer anchor={props.anchor} open={state[props.anchor]} onOpen={toggleDrawer(props.anchor, true)} onClose={toggleDrawer(props.anchor, false)}>
-                    {list(props.anchor)}
-                </SwipeableDrawer>
-            </React.Fragment>
-        </div>
-    );
+interface TempDrawerProps extends WithStyles<typeof useStyles> {
+    anchor: Anchor;
+};
+interface TempDrawerState {
+    top: boolean;
+    left: boolean;
+    bottom: boolean;
+    right: boolean;
 }
+//#endregion Types
+
+//#region Main
+class TemporaryDrawer extends React.Component<TempDrawerProps, TempDrawerState>{
+    private classes: Record<keyof ReturnType<typeof useStyles>, string>;
+    constructor(props: TempDrawerProps) {
+        super(props);
+        this.classes = this.props.classes;
+        this.state = { top: false, left: false, bottom: false, right: false};
+    }
+    toggleDrawer(anchor: Anchor, open: boolean){
+        return (
+            event: React.KeyboardEvent | React.MouseEvent,
+        ) => {
+            if (
+                event &&
+                event.type === 'keydown' &&
+                ((event as React.KeyboardEvent).key === 'Tab' ||
+                    (event as React.KeyboardEvent).key === 'Shift')
+            ) {
+                return;
+            }
+    
+            this.setState({ ...this.state, [anchor]: open });
+        };
+    }
+    list(anchor: Anchor){
+        return (
+            <div
+                className={clsx(this.classes.list, {
+                    [this.classes.fullList]: anchor === 'top' || anchor === 'bottom',
+                })}
+                role="presentation"
+            >
+                {this.props.children}
+            </div>
+        );
+    }
+    render(){
+        return (
+            <div>
+                <React.Fragment key={this.props.anchor}>
+                    <IconButton onClick={this.toggleDrawer(this.props.anchor, true)} edge="start" className={this.classes.menuButton} color="inherit" aria-label="menu">
+                        <MenuIcon />
+                    </IconButton>
+                    <SwipeableDrawer anchor={this.props.anchor} open={this.state[this.props.anchor]} onOpen={this.toggleDrawer(this.props.anchor, true)} onClose={this.toggleDrawer(this.props.anchor, false)}>
+                        {this.list(this.props.anchor)}
+                    </SwipeableDrawer>
+                </React.Fragment>
+            </div>
+        );
+    }
+}
+
+export default withStyles(useStyles)(TemporaryDrawer);
+//#endregion Main
