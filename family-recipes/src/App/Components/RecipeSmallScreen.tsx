@@ -51,11 +51,11 @@ const useStyles = (theme: Theme) => createStyles({
 });
 
 interface RecipeProps extends WithStyles<typeof useStyles, true> {
-    title?: string;
-    resultImg?: string;
-    summary?: string;
-    ingredients?: string[];
-    steps?: string[];
+    title: string;
+    resultImg: string;
+    summary: string;
+    ingredients: string[];
+    steps: string[];
     tags?: string[];
 };
 interface RecipeState {
@@ -120,10 +120,18 @@ class RecipeSmallScreen extends React.Component<RecipeProps, RecipeState>{
                                             <p>{this.props.summary}</p>
                                         </TabPanel>
                                         <TabPanel value={this.state.currentTab} index={1} dir={this.theme.direction}>
-                                            ABC
+                                            <ul>
+                                                {this.props.ingredients.map((ingredient, key) => {
+                                                    return (<li key={key}>{ingredient}</li>);
+                                                })}
+                                            </ul>
                                         </TabPanel>
                                         <TabPanel value={this.state.currentTab} index={2} dir={this.theme.direction}>
-                                            ABC
+                                            <ol>
+                                                {this.props.steps.map((step, key) => {
+                                                    return (<li key={key}>{step}</li>);
+                                                })}
+                                            </ol>
                                         </TabPanel>
                                     </SwipeableViews>
                                 </CardContent>

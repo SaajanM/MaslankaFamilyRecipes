@@ -1,8 +1,6 @@
 import React from 'react';
 import { createStyles, WithStyles, withStyles, Theme } from '@material-ui/core/styles';
-import SearchBar from '../Components/SearchBar';
-import Button from '@material-ui/core/Button';
-import Recipe from '../Components/RecipeLargeScreen';
+import Recipe from '../Components/Recipe';
 
 const useStyles = (theme: Theme) => {
     return createStyles({

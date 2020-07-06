@@ -44,7 +44,7 @@ class Recipe extends React.Component<RecipeProps>{
     }
     render() {
         return (
-            <div className={this.classes.recipeRoot}>
+            <div className={this.classes.recipeRoot} onClick={()=>window.alert('bleg')}>
                 <div className={this.classes.largeRecipe}>
                     <RecipeLargeScreen
                         title={this.props.title}
@@ -57,6 +57,12 @@ class Recipe extends React.Component<RecipeProps>{
                 </div>
                 <div className={this.classes.smallRecipe}>
                     <RecipeSmallScreen
+                        title={this.props.title}
+                        resultImg={this.props.resultImg}
+                        summary={this.props.summary}
+                        ingredients={this.props.ingredients}
+                        steps={this.props.steps}
+                        tags={this.props.tags}
                     ></RecipeSmallScreen>
                 </div>
             </div>

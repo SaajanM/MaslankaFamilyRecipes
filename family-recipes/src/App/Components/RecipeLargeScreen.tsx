@@ -89,7 +89,6 @@ class RecipeLargeScreen extends React.Component<RecipeProps, RecipeState>{
                     </div>
                     <div className={this.classes.tabNavContainer}>
                         <Card className={this.classes.tabNavCard}>
-
                             <div className={this.classes.tabRoot}>
                                 <AppBar position="static" className={this.classes.tabCardHeader}>
                                     <Tabs
