@@ -8,6 +8,11 @@ const TITLE = "Maslanka Family Recipes"
 const appTheme = createMuiTheme({
   palette: {
     type: 'dark',
+    secondary: {
+      main:'#ffffff'
+    },
+    contrastThreshold: 3,
+    tonalOffset: 0.2,
   },
 });
 const useStyles = (theme: Theme) => {

@@ -2,7 +2,7 @@ import React from 'react';
 import { createStyles, WithStyles, withStyles, Theme } from '@material-ui/core/styles';
 import SearchBar from '../Components/SearchBar';
 import Button from '@material-ui/core/Button';
-import Recipe from '../Components/Recipe';
+import Recipe from '../Components/RecipeLargeScreen';
 
 const useStyles = (theme: Theme) => {
     return createStyles({
@@ -42,7 +42,13 @@ class MainPage extends React.Component<WithStyles<typeof useStyles>> {
     }
     render() {
         return (
-            <Recipe></Recipe>
+            <Recipe
+                title="Garlic Naan"
+                resultImg="naan.png"
+                summary="This delicious recipe bring together the best of garlic and naan!"
+                ingredients={['garlic','naan']}
+                steps={['make da food']}
+            ></Recipe>
             /*
             <div className={this.classes.hero}>
                 <div className={this.classes.heroInner}>
