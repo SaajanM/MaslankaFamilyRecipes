@@ -8,6 +8,7 @@ const useStyles = (theme: Theme) => createStyles({
         display: "none",
         width: "inherit",
         flex: "1 1 auto",
+        minHeight:0,
         [theme.breakpoints.down('sm')]: {
             display: "flex"
         }
@@ -16,14 +17,16 @@ const useStyles = (theme: Theme) => createStyles({
         display: "none",
         width: "inherit",
         flex: "1 1 auto",
+        minHeight:0,
         [theme.breakpoints.up('md')]: {
             display: "flex"
         }
     },
     "recipeRoot": {
         width: "inherit",
-        height: "inherit",
-        display: "flex"
+        flex: "1 1 auto",
+        display: "flex",
+        minHeight:0
     }
 });
 
@@ -33,7 +36,7 @@ interface RecipeProps extends WithStyles<typeof useStyles> {
     summary: string;
     ingredients: string[];
     steps: string[];
-    tags?: string[];
+    tags: string[];
 };
 
 class Recipe extends React.Component<RecipeProps>{
@@ -44,7 +47,7 @@ class Recipe extends React.Component<RecipeProps>{
     }
     render() {
         return (
-            <div className={this.classes.recipeRoot} onClick={()=>window.alert('bleg')}>
+            <div className={this.classes.recipeRoot}>
                 <div className={this.classes.largeRecipe}>
                     <RecipeLargeScreen
                         title={this.props.title}

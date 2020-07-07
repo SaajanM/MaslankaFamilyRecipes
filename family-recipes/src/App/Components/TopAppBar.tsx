@@ -60,15 +60,15 @@ class TopAppBar extends React.Component<TopAppBarProps>{
                 <AppBar position="static" className={this.classes.appBar}>
                     <Toolbar>
                         <TemporaryDrawer anchor="left">
-                            <ListSubheader>Recipe Search</ListSubheader>
+                            <ListSubheader disableSticky={true}>Recipe Search</ListSubheader>
                             <SearchBar type="fixed" placeholder="Search Recipes..."></SearchBar>
-                            <ListSubheader>Quick Links</ListSubheader>
+                            <ListSubheader disableSticky={true}>Quick Links</ListSubheader>
                             <List>
                                 <DrawerListIconItem title="Browse Recipes" icon={SortIcon} link="/recipes"></DrawerListIconItem>
                                 <DrawerListIconItem title="Recommended" icon={StarIcon} link="/recipes?tags=recommended"></DrawerListIconItem>
                                 <DrawerListIconItem title="Random Recipe" icon={CasinoIcon} link="/random"></DrawerListIconItem>
                             </List>
-                            <ListSubheader>Meal Types</ListSubheader>
+                            <ListSubheader disableSticky={true}>Meal Types</ListSubheader>
                             <List>
                                 <DrawerListIconItem title="Breakfasts" icon={BreakfastIcon} viewBox="0 0 512 512" link="/recipes?tags=breakfast"></DrawerListIconItem>
                                 <DrawerListIconItem title="Lunches" icon={LunchIcon} viewBox="0 0 512 512" link="/recipes?tags=lunch"></DrawerListIconItem>
@@ -77,7 +77,7 @@ class TopAppBar extends React.Component<TopAppBarProps>{
                                 <DrawerListIconItem title="Snacks" icon={SnackIcon} viewBox="0 0 24 24" link="/recipes?tags=snack"></DrawerListIconItem>
                             </List>
                         </TemporaryDrawer>
-                        <Typography variant="h6" className={this.classes.title}> {this.props.title} </Typography>
+                        <Typography variant="h6" className={this.classes.title}>{this.props.title} </Typography>
                         <SearchBar type="expandable" placeholder="Search Recipes..."></SearchBar>
                     </Toolbar>
                 </AppBar>

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Box } from '@material-ui/core';
 
 interface TabPanelProps {
     dir?: string;
@@ -19,9 +18,7 @@ export default class TabPanel extends React.Component<TabPanelProps> {
                 id={`full-width-tabpanel-${this.props.index}`}
                 aria-labelledby={`full-width-tab-${this.props.index}`}
             >
-                <Box p={3}>
-                    {this.props.children}
-                </Box>
+                {this.props.children}
             </div>
         );
     }

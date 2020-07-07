@@ -3,17 +3,20 @@ import { createStyles, Theme, WithStyles, withStyles, lighten } from '@material-
 import { Card, CardContent, Typography, AppBar, Tabs, Tab } from '@material-ui/core';
 import SwipeableViews from 'react-swipeable-views';
 import TabPanel from './TabPanel';
+import TagChip from './TagChip';
 
 //#region Classes
 const useStyles = (theme: Theme) => createStyles({
     "recipeCard": {
         display: "flex",
         margin: "2vw",
-        flex: '1 1 auto'
+        flex: '1 1 auto',
+        minHeight:0,
     },
     "content": {
         display: "flex",
         flex: '1 1 auto',
+        minHeight:0,
         padding: "inherit",
         "&:last-child": {
             paddingBottom: 0
@@ -25,18 +28,38 @@ const useStyles = (theme: Theme) => createStyles({
     },
     "tabNavContainer": {
         margin: theme.spacing(2.5),
-        flex: '60%'
+        flex: '60%',
+        minHeight:0,
+        display: "flex",
+        flexDirection: "column",
     },
     "tabNavCard": {
-        height: "100%",
-        backgroundColor: lighten(theme.palette.background.paper, 0.10)
+        flex: '1 1 auto',
+        backgroundColor: lighten(theme.palette.background.paper, 0.10),
+        minHeight:0,
+        display:'flex',
+        flexDirection: 'column'
     },
     "tabRoot": {
         backgroundColor: lighten(theme.palette.background.paper, 0.10),
         width: "100%",
+        display:"flex",
+        flexDirection:"column",
+        minHeight:0,
+        flex: '1 1 auto',
     },
     "tabCardHeader": {
         backgroundColor: theme.palette.background.default,
+    },
+    "tag":{
+        marginRight: theme.spacing(1),
+        marginTop: theme.spacing(1),
+    },
+    "tabContent":{
+        height: "100%",
+        flex: '1 1 auto',
+        minHeight:0,
+        overflow: "auto"
     }
 });
 //#endregion Classes
@@ -48,7 +71,7 @@ interface RecipeProps extends WithStyles<typeof useStyles, true> {
     summary: string;
     ingredients: string[];
     steps: string[];
-    tags?: string[];
+    tags: string[];
 };
 interface RecipeState {
     currentTab: number;
@@ -84,6 +107,11 @@ class RecipeLargeScreen extends React.Component<RecipeProps, RecipeState>{
                 <CardContent className={this.classes.content}>
                     <div className={this.classes.overview}>
                         <Typography variant="h4">{this.props.title}</Typography>
+                        <div>
+                            {this.props.tags.map(tag=>{
+                                return <TagChip label={tag} link={`/recipes?tags=${tag}`} className={this.classes.tag}/>
+                            })}
+                        </div>
                         <p>{this.props.resultImg}</p>
                         <p>{this.props.summary}</p>
                     </div>
@@ -103,7 +131,7 @@ class RecipeLargeScreen extends React.Component<RecipeProps, RecipeState>{
                                         <Tab label="Steps" {...this.a11yProps(1)} />
                                     </Tabs>
                                 </AppBar>
-                                <CardContent>
+                                <CardContent className={this.classes.tabContent}>
                                     <SwipeableViews
                                         axis={this.theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                                         index={this.state.currentTab}

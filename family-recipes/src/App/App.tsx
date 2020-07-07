@@ -9,7 +9,7 @@ const appTheme = createMuiTheme({
   palette: {
     type: 'dark',
     secondary: {
-      main:'#ffffff'
+      main: '#ffffff'
     },
     contrastThreshold: 3,
     tonalOffset: 0.2,
@@ -19,12 +19,24 @@ const useStyles = (theme: Theme) => {
   return createStyles({
     "App": {
       display: 'flex',
-      flexFlow: 'column',
+      flexDirection: 'column',
       height: "100%",
       backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 1)), url(\"banner1.png\")",
       backgroundPosition: "center",
       backgroundRepeat: "no-repeat",
       backgroundSize: "cover",
+    },
+    '@global': {
+      '*::-webkit-scrollbar': {
+        width: '0.4em'
+      },
+      '*::-webkit-scrollbar-track': {
+        'background-color': 'rgba(0,0,0,0.1)',
+      },
+      '*::-webkit-scrollbar-thumb': {
+        backgroundColor: 'rgba(0,0,0,.2)',
+        outline: '1px solid slategrey'
+      }
     }
   });
 };

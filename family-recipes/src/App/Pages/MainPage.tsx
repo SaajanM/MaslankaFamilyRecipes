@@ -1,6 +1,8 @@
 import React from 'react';
 import { createStyles, WithStyles, withStyles, Theme } from '@material-ui/core/styles';
-import Recipe from '../Components/Recipe';
+import { Button } from '@material-ui/core';
+import SearchBar from '../Components/SearchBar';
+import {Link} from 'react-router-dom';
 
 const useStyles = (theme: Theme) => {
     return createStyles({
@@ -40,14 +42,6 @@ class MainPage extends React.Component<WithStyles<typeof useStyles>> {
     }
     render() {
         return (
-            <Recipe
-                title="Garlic Naan"
-                resultImg="naan.png"
-                summary="This delicious recipe bring together the best of garlic and naan!"
-                ingredients={['garlic','naan']}
-                steps={['make da food']}
-            ></Recipe>
-            /*
             <div className={this.classes.hero}>
                 <div className={this.classes.heroInner}>
                     <h1>Maslanka Family Recipes</h1>
@@ -57,11 +51,10 @@ class MainPage extends React.Component<WithStyles<typeof useStyles>> {
                     </div>
                     <p>or</p>
                     <div className={this.classes.heroBrowse}>
-                        <Button color="inherit">Browse All Recipes</Button>
+                        <Button color="inherit" component={Link} to="/recipes">Browse All Recipes</Button>
                     </div>
                 </div>
             </div>
-            */
         );
     }
 }
