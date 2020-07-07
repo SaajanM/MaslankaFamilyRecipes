@@ -37,6 +37,7 @@ interface RecipeProps extends WithStyles<typeof useStyles> {
     ingredients: string[];
     steps: string[];
     tags: string[];
+    invalid?: boolean;
 };
 
 class Recipe extends React.Component<RecipeProps>{
@@ -56,6 +57,7 @@ class Recipe extends React.Component<RecipeProps>{
                         ingredients={this.props.ingredients}
                         steps={this.props.steps}
                         tags={this.props.tags}
+                        invalid={this.props.invalid}
                     ></RecipeLargeScreen>
                 </div>
                 <div className={this.classes.smallRecipe}>
@@ -66,6 +68,7 @@ class Recipe extends React.Component<RecipeProps>{
                         ingredients={this.props.ingredients}
                         steps={this.props.steps}
                         tags={this.props.tags}
+                        invalid={this.props.invalid}
                     ></RecipeSmallScreen>
                 </div>
             </div>

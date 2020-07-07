@@ -68,6 +68,7 @@ interface RecipeProps extends WithStyles<typeof useStyles, true> {
     ingredients: string[];
     steps: string[];
     tags: string[];
+    invalid?: boolean;
 };
 interface RecipeState {
     currentTab: number;
@@ -95,6 +96,17 @@ class RecipeSmallScreen extends React.Component<RecipeProps, RecipeState>{
         this.setState({ ...this.state, currentTab: newIndex });
     }
     render() {
+        if(this.props.invalid){
+            return(
+                <Card className={this.classes.recipeCard}>
+                <CardContent className={this.classes.content}>
+                    <div className={this.classes.overview}>
+                        <Typography variant="h4">Recipe Not Found</Typography>
+                    </div>
+                </CardContent>
+            </Card>
+            );
+        }
         return (
             //Mobile
             <Card className={this.classes.recipeCard}>
@@ -127,11 +139,11 @@ class RecipeSmallScreen extends React.Component<RecipeProps, RecipeState>{
                                         onChangeIndex={this.handleTabChangeIndex.bind(this)}
                                     >
                                         <TabPanel value={this.state.currentTab} index={0} dir={this.theme.direction}>
-                                            <p>{this.props.resultImg}</p>
+                                        <img src={this.props.resultImg}/>
                                             <p>{this.props.summary}</p>
                                             <div>
-                                                {this.props.tags.map(tag => {
-                                                    return <TagChip label={tag} link={`/recipes?tags=${tag}`} className={this.classes.tag} />
+                                                {this.props.tags.map((tag,i) => {
+                                                    return <TagChip label={tag} key={i} link={`/recipes?tags=${tag}`} className={this.classes.tag} />
                                                 })}
                                             </div>
                                         </TabPanel>

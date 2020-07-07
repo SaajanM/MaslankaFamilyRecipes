@@ -11,12 +11,12 @@ const useStyles = (theme: Theme) => createStyles({
         display: "flex",
         margin: "2vw",
         flex: '1 1 auto',
-        minHeight:0,
+        minHeight: 0,
     },
     "content": {
         display: "flex",
         flex: '1 1 auto',
-        minHeight:0,
+        minHeight: 0,
         padding: "inherit",
         "&:last-child": {
             paddingBottom: 0
@@ -29,36 +29,36 @@ const useStyles = (theme: Theme) => createStyles({
     "tabNavContainer": {
         margin: theme.spacing(2.5),
         flex: '60%',
-        minHeight:0,
+        minHeight: 0,
         display: "flex",
         flexDirection: "column",
     },
     "tabNavCard": {
         flex: '1 1 auto',
         backgroundColor: lighten(theme.palette.background.paper, 0.10),
-        minHeight:0,
-        display:'flex',
+        minHeight: 0,
+        display: 'flex',
         flexDirection: 'column'
     },
     "tabRoot": {
         backgroundColor: lighten(theme.palette.background.paper, 0.10),
         width: "100%",
-        display:"flex",
-        flexDirection:"column",
-        minHeight:0,
+        display: "flex",
+        flexDirection: "column",
+        minHeight: 0,
         flex: '1 1 auto',
     },
     "tabCardHeader": {
         backgroundColor: theme.palette.background.default,
     },
-    "tag":{
+    "tag": {
         marginRight: theme.spacing(1),
         marginTop: theme.spacing(1),
     },
-    "tabContent":{
+    "tabContent": {
         height: "100%",
         flex: '1 1 auto',
-        minHeight:0,
+        minHeight: 0,
         overflow: "auto"
     }
 });
@@ -72,6 +72,7 @@ interface RecipeProps extends WithStyles<typeof useStyles, true> {
     ingredients: string[];
     steps: string[];
     tags: string[];
+    invalid?: boolean;
 };
 interface RecipeState {
     currentTab: number;
@@ -101,6 +102,17 @@ class RecipeLargeScreen extends React.Component<RecipeProps, RecipeState>{
         this.setState({ ...this.state, currentTab: newIndex });
     }
     render() {
+        if (this.props.invalid) {
+            return (
+                <Card className={this.classes.recipeCard}>
+                    <CardContent className={this.classes.content}>
+                        <div className={this.classes.overview}>
+                            <Typography variant="h4">Recipe Not Found</Typography>
+                        </div>
+                    </CardContent>
+                </Card>
+            );
+        }
         return (
             //Desktop
             <Card className={this.classes.recipeCard}>
@@ -108,11 +120,11 @@ class RecipeLargeScreen extends React.Component<RecipeProps, RecipeState>{
                     <div className={this.classes.overview}>
                         <Typography variant="h4">{this.props.title}</Typography>
                         <div>
-                            {this.props.tags.map(tag=>{
-                                return <TagChip label={tag} link={`/recipes?tags=${tag}`} className={this.classes.tag}/>
+                            {this.props.tags.map((tag, i) => {
+                                return <TagChip label={tag} key={i} link={`/recipes?tags=${tag}`} className={this.classes.tag} />
                             })}
                         </div>
-                        <p>{this.props.resultImg}</p>
+                        <img src={this.props.resultImg} />
                         <p>{this.props.summary}</p>
                     </div>
                     <div className={this.classes.tabNavContainer}>
@@ -139,14 +151,14 @@ class RecipeLargeScreen extends React.Component<RecipeProps, RecipeState>{
                                     >
                                         <TabPanel value={this.state.currentTab} index={0} dir={this.theme.direction}>
                                             <ul>
-                                                {this.props.ingredients.map((ingredient,key) => {
+                                                {this.props.ingredients.map((ingredient, key) => {
                                                     return (<li key={key}>{ingredient}</li>);
                                                 })}
                                             </ul>
                                         </TabPanel>
                                         <TabPanel value={this.state.currentTab} index={1} dir={this.theme.direction}>
                                             <ol>
-                                                {this.props.steps.map((step,key) => {
+                                                {this.props.steps.map((step, key) => {
                                                     return (<li key={key}>{step}</li>);
                                                 })}
                                             </ol>
