@@ -21,7 +21,7 @@ const useStyles = (theme: Theme) => {
       display: 'flex',
       flexDirection: 'column',
       height: "100%",
-      backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 1)), url(\"banner1.png\")",
+      backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 1)), url(\"/banner1.png\")",
       backgroundPosition: "center",
       backgroundRepeat: "no-repeat",
       backgroundSize: "cover",

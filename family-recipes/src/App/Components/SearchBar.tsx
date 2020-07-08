@@ -72,7 +72,7 @@ const useStyles = (theme: Theme) => {
 interface SearchBarProps extends WithStyles<typeof useStyles> {
     placeholder: string;
     type: "expandable" | "fixed";
-    callback?: ()=>void;
+    callback?: () => void;
 }
 interface SearchBarState {
     value: string;
@@ -84,30 +84,34 @@ class SearchBar extends React.Component<SearchBarProps, SearchBarState>{
     constructor(props: SearchBarProps) {
         super(props);
         this.classes = this.props.classes;
-        this.state = { value: "", submitted: false};
+        this.state = { value: "", submitted: false };
     }
     updateSearch(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) {
         this.setState({ ...this.state, value: event.target.value });
     }
-    search(){
-        this.setState({ ...this.state, submitted: true });
-        if(this.props.callback){
+    search(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        if (this.state.value !== "") {
+            this.setState({ ...this.state, submitted: true });
+        }
+        if (this.props.callback) {
             this.props.callback();
         }
+        return false;
     }
     render() {
-        if(this.state.submitted){
-            this.setState({...this.state, submitted:false})
+        if (this.state.submitted) {
+            this.setState({ ...this.state, submitted: false })
             return (<Redirect push to={"/recipes?q=" + this.state.value} />);
         }
         return (
-            <form onSubmit={()=>this.search()}>
+            <form onSubmit={(e) => this.search(e)}>
                 <div className={(this.props.type === "expandable") ? this.classes.search : this.classes.drawerSearch}>
                     <div className={this.classes.searchIcon}>
                         <SearchIcon />
                     </div>
                     <InputBase
-                        onChange={(e)=>this.updateSearch(e)}
+                        onChange={(e) => this.updateSearch(e)}
                         placeholder={this.props.placeholder}
                         classes={{
                             root: this.classes.inputRoot,

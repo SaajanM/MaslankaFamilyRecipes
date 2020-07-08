@@ -39,7 +39,6 @@ class RecipePage extends React.Component<RecipePageProps, RecipePageState>{
                     repo: "MaslankaFamilyRecipes",
                     path: `family-recipes/recipes/${this.recipe}.json`
                 }).then(response => {
-
                     this.setState(JSON.parse(atob(response.data.content)));
                 });
             }else{
