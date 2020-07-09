@@ -154,7 +154,7 @@ class RecipeSmallScreen extends React.Component<RecipeProps, RecipeState>{
                                         onChangeIndex={this.handleTabChangeIndex.bind(this)}
                                     >
                                         <TabPanel value={this.state.currentTab} index={0} dir={this.theme.direction}>
-                                        <img className={this.classes.resultImg} src={this.props.resultImg}/>
+                                        <img className={this.classes.resultImg} src={this.props.resultImg} alt={this.props.title+".png"}/>
                                             <Typography>{this.props.summary}</Typography>
                                             <div>
                                                 {this.props.tags.map((tag,i) => {
