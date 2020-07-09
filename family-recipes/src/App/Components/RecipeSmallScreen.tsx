@@ -58,7 +58,21 @@ const useStyles = (theme: Theme) => createStyles({
     "tag": {
         marginRight: theme.spacing(1),
         marginTop: theme.spacing(1),
-    }
+    },
+    "resultImg":{
+        minWidth:0,
+        width:"100%",
+        height: "auto",
+        marginBottom:theme.spacing(1.5),
+    },
+    "swipeableZone":{
+        height:"100%",
+    },
+    "list":{
+        "&:not(:last-child)":{
+            marginBottom: theme.spacing(1),
+        },
+    },
 });
 
 interface RecipeProps extends WithStyles<typeof useStyles, true> {
@@ -134,13 +148,14 @@ class RecipeSmallScreen extends React.Component<RecipeProps, RecipeState>{
                                 </AppBar>
                                 <CardContent className={this.classes.tabContent}>
                                     <SwipeableViews
+                                        className={this.classes.swipeableZone}
                                         axis={this.theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                                         index={this.state.currentTab}
                                         onChangeIndex={this.handleTabChangeIndex.bind(this)}
                                     >
                                         <TabPanel value={this.state.currentTab} index={0} dir={this.theme.direction}>
-                                        <img src={this.props.resultImg}/>
-                                            <p>{this.props.summary}</p>
+                                        <img className={this.classes.resultImg} src={this.props.resultImg}/>
+                                            <Typography>{this.props.summary}</Typography>
                                             <div>
                                                 {this.props.tags.map((tag,i) => {
                                                     return <TagChip label={tag} key={i} link={`/recipes?tags=${tag}`} className={this.classes.tag} />
@@ -150,14 +165,14 @@ class RecipeSmallScreen extends React.Component<RecipeProps, RecipeState>{
                                         <TabPanel value={this.state.currentTab} index={1} dir={this.theme.direction}>
                                             <ul>
                                                 {this.props.ingredients.map((ingredient, key) => {
-                                                    return (<li key={key}>{ingredient}</li>);
+                                                    return (<Typography component="li" className={this.classes.list} key={key}>{ingredient}</Typography>);
                                                 })}
                                             </ul>
                                         </TabPanel>
                                         <TabPanel value={this.state.currentTab} index={2} dir={this.theme.direction}>
                                             <ol>
                                                 {this.props.steps.map((step, key) => {
-                                                    return (<li key={key}>{step}</li>);
+                                                    return (<Typography component="li" className={this.classes.list} key={key}>{step}</Typography>);
                                                 })}
                                             </ol>
                                         </TabPanel>

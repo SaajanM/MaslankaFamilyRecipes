@@ -24,10 +24,14 @@ const useStyles = (theme: Theme) => createStyles({
     },
     "overview": {
         margin: theme.spacing(2.5),
-        flex: '40%'
+        flex: '40%',
+        minWidth: 0,
+        display: "flex",
+        flexDirection: "column"
     },
     "tabNavContainer": {
         margin: theme.spacing(2.5),
+        marginLeft: 0,
         flex: '60%',
         minHeight: 0,
         display: "flex",
@@ -60,7 +64,26 @@ const useStyles = (theme: Theme) => createStyles({
         flex: '1 1 auto',
         minHeight: 0,
         overflow: "auto"
-    }
+    },
+    "resultImg": {
+        maxWidth: "100%",
+        maxHeight: "auto",
+        marginBottom: theme.spacing(1),
+    },
+    "recipeInfo": {
+        marginTop: theme.spacing(2.5),
+        flex: "1 1 auto",
+        minHeight: 0,
+        overflow: "auto"
+    },
+    "swipeableZone": {
+        height: "100%",
+    },
+    "list":{
+        "&:not(:last-child)":{
+            marginBottom: theme.spacing(1),
+        },
+    },
 });
 //#endregion Classes
 
@@ -124,8 +147,11 @@ class RecipeLargeScreen extends React.Component<RecipeProps, RecipeState>{
                                 return <TagChip label={tag} key={i} link={`/recipes?tags=${tag}`} className={this.classes.tag} />
                             })}
                         </div>
-                        <img src={this.props.resultImg} />
-                        <p>{this.props.summary}</p>
+                        <div className={this.classes.recipeInfo}>
+                            <img className={this.classes.resultImg} src={this.props.resultImg} alt={this.props.title + ".png"} />
+                            <Typography>{this.props.summary}</Typography>
+                        </div>
+
                     </div>
                     <div className={this.classes.tabNavContainer}>
                         <Card className={this.classes.tabNavCard}>
@@ -145,6 +171,7 @@ class RecipeLargeScreen extends React.Component<RecipeProps, RecipeState>{
                                 </AppBar>
                                 <CardContent className={this.classes.tabContent}>
                                     <SwipeableViews
+                                        className={this.classes.swipeableZone}
                                         axis={this.theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                                         index={this.state.currentTab}
                                         onChangeIndex={this.handleTabChangeIndex.bind(this)}
@@ -152,14 +179,14 @@ class RecipeLargeScreen extends React.Component<RecipeProps, RecipeState>{
                                         <TabPanel value={this.state.currentTab} index={0} dir={this.theme.direction}>
                                             <ul>
                                                 {this.props.ingredients.map((ingredient, key) => {
-                                                    return (<li key={key}>{ingredient}</li>);
+                                                    return (<Typography component="li" className={this.classes.list} key={key}>{ingredient}</Typography>);
                                                 })}
                                             </ul>
                                         </TabPanel>
                                         <TabPanel value={this.state.currentTab} index={1} dir={this.theme.direction}>
                                             <ol>
                                                 {this.props.steps.map((step, key) => {
-                                                    return (<li key={key}>{step}</li>);
+                                                    return (<Typography component="li" className={this.classes.list} key={key}>{step}</Typography>);
                                                 })}
                                             </ol>
                                         </TabPanel>
