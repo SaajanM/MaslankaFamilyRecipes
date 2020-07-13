@@ -11,10 +11,10 @@ export default class Content extends React.Component {
       <BrowserRouter>
         {this.props.children} 
         <Switch>
-          <Route exact path='/' component={MainPage}/>
-          <Route path='/recipes' component={SearchPage}/>
-          <Route exact path='/random' component={MainPage}/>
-          <Route path="/recipe" component={RecipePage}>
+          <Route exact path='/MaslankaFamilyRecipes/' component={MainPage}/>
+          <Route path='/MaslankaFamilyRecipes/recipes' component={SearchPage}/>
+          <Route exact path='/MaslankaFamilyRecipes/random' component={MainPage}/>
+          <Route path="/MaslankaFamilyRecipes/recipe" component={RecipePage}>
           </Route>
         </Switch>
       </BrowserRouter>
