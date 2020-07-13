@@ -1,29 +1,20 @@
 import React from 'react';
 import Recipe from '../Components/Recipe';
-import { Octokit } from '@octokit/rest';
 import { withRouter } from 'react-router-dom';
 import { RouteComponentProps } from "react-router";
 import StreamArray from 'stream-json/streamers/StreamArray';
 import http from 'http';
+import { RecipeInfo } from '../Types/RecipeInfo';
 
 
 type RecipePageProps = RouteComponentProps & {
     recipe: string;
-}
-interface RecipeInfo{
-    title: string;
-    resultImg: string;
-    summary: string;
-    ingredients: string[];
-    steps: string[];
-    tags: string[];
 }
 interface RecipePageState extends RecipeInfo {
     invalidRecipe: boolean;
 }
 
 class RecipePage extends React.Component<RecipePageProps, RecipePageState>{
-    private ok = new Octokit({ auth: process.env.REACT_APP_GITHUB_TOKEN });
     private recipe: string;
     constructor(props: RecipePageProps) {
         super(props);

@@ -2,6 +2,7 @@ import React from 'react';
 import { createStyles, Theme, WithStyles, withStyles } from '@material-ui/core/styles';
 import RecipeLargeScreen from './RecipeLargeScreen';
 import RecipeSmallScreen from './RecipeSmallScreen';
+import { RecipeInfo } from '../Types/RecipeInfo';
 
 const useStyles = (theme: Theme) => createStyles({
     "smallRecipe": {
@@ -30,15 +31,9 @@ const useStyles = (theme: Theme) => createStyles({
     }
 });
 
-interface RecipeProps extends WithStyles<typeof useStyles> {
-    title: string;
-    resultImg: string;
-    summary: string;
-    ingredients: string[];
-    steps: string[];
-    tags: string[];
+interface RecipeProps extends RecipeInfo<WithStyles<typeof useStyles>> {
     invalid?: boolean;
-};
+}
 
 class Recipe extends React.Component<RecipeProps>{
     private classes: Record<keyof ReturnType<typeof useStyles>, string>;

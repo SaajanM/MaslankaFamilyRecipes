@@ -72,7 +72,10 @@ const useStyles = (theme: Theme) => {
 interface SearchBarProps extends WithStyles<typeof useStyles> {
     placeholder: string;
     type: "expandable" | "fixed";
-    callback?: () => void;
+    callback?: (value: string) => void;
+    initialValue?: string;
+    className?: string;
+    style?: React.CSSProperties;
 }
 interface SearchBarState {
     value: string;
@@ -84,18 +87,22 @@ class SearchBar extends React.Component<SearchBarProps, SearchBarState>{
     constructor(props: SearchBarProps) {
         super(props);
         this.classes = this.props.classes;
-        this.state = { value: "", submitted: false };
+        let initialValue = this.props.initialValue?this.props.initialValue:"";
+        this.state = { value: initialValue, submitted: false };
     }
     updateSearch(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) {
+        if (this.props.callback) {
+            this.props.callback(event.target.value);
+        }
         this.setState({ ...this.state, value: event.target.value });
     }
     search(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        if (this.state.value !== "") {
-            this.setState({ ...this.state, submitted: true });
-        }
         if (this.props.callback) {
-            this.props.callback();
+            this.props.callback(this.state.value);
+            return false;
+        }else if (this.state.value !== "") {
+            this.setState({ ...this.state, submitted: true });
         }
         return false;
     }
@@ -105,7 +112,7 @@ class SearchBar extends React.Component<SearchBarProps, SearchBarState>{
             return (<Redirect push to={"/recipes?q=" + this.state.value} />);
         }
         return (
-            <form onSubmit={(e) => this.search(e)}>
+            <form style={this.props.style} onSubmit={(e) => this.search(e)} className={this.props.className}>
                 <div className={(this.props.type === "expandable") ? this.classes.search : this.classes.drawerSearch}>
                     <div className={this.classes.searchIcon}>
                         <SearchIcon />
@@ -118,6 +125,7 @@ class SearchBar extends React.Component<SearchBarProps, SearchBarState>{
                             input: (this.props.type === "expandable") ? this.classes.inputInput : this.classes.drawerInputInput,
                         }}
                         inputProps={{ 'aria-label': 'search' }}
+                        value={this.state.value}
                     />
                 </div>
             </form>

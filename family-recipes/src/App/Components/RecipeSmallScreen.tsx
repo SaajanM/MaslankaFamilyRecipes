@@ -4,6 +4,7 @@ import { Card, CardContent, Typography, AppBar, Tabs, Tab } from '@material-ui/c
 import SwipeableViews from 'react-swipeable-views';
 import TabPanel from './TabPanel';
 import TagChip from './TagChip';
+import { RecipeInfo } from '../Types/RecipeInfo';
 
 const useStyles = (theme: Theme) => createStyles({
     "recipeCard": {
@@ -64,6 +65,8 @@ const useStyles = (theme: Theme) => createStyles({
         width:"100%",
         height: "auto",
         marginBottom:theme.spacing(1.5),
+        boxShadow: theme.shadows[1],
+        borderRadius: "4px",
     },
     "swipeableZone":{
         height:"100%",
@@ -75,13 +78,7 @@ const useStyles = (theme: Theme) => createStyles({
     },
 });
 
-interface RecipeProps extends WithStyles<typeof useStyles, true> {
-    title: string;
-    resultImg: string;
-    summary: string;
-    ingredients: string[];
-    steps: string[];
-    tags: string[];
+interface RecipeProps extends RecipeInfo<WithStyles<typeof useStyles, true>> {
     invalid?: boolean;
 };
 interface RecipeState {
@@ -158,7 +155,7 @@ class RecipeSmallScreen extends React.Component<RecipeProps, RecipeState>{
                                             <Typography>{this.props.summary}</Typography>
                                             <div>
                                                 {this.props.tags.map((tag,i) => {
-                                                    return <TagChip label={tag} key={i} link={`/recipes?tags=${tag}`} className={this.classes.tag} />
+                                                    return <TagChip variant="link" label={tag} key={i} link={`/recipes?tags=${tag}`} className={this.classes.tag} />
                                                 })}
                                             </div>
                                         </TabPanel>

@@ -4,6 +4,7 @@ import { Card, CardContent, Typography, AppBar, Tabs, Tab } from '@material-ui/c
 import SwipeableViews from 'react-swipeable-views';
 import TabPanel from './TabPanel';
 import TagChip from './TagChip';
+import { RecipeInfo } from '../Types/RecipeInfo';
 
 //#region Classes
 const useStyles = (theme: Theme) => createStyles({
@@ -69,6 +70,8 @@ const useStyles = (theme: Theme) => createStyles({
         maxWidth: "100%",
         maxHeight: "auto",
         marginBottom: theme.spacing(1),
+        boxShadow: theme.shadows[1],
+        borderRadius: "4px",
     },
     "recipeInfo": {
         marginTop: theme.spacing(2.5),
@@ -88,13 +91,7 @@ const useStyles = (theme: Theme) => createStyles({
 //#endregion Classes
 
 //#region Types
-interface RecipeProps extends WithStyles<typeof useStyles, true> {
-    title: string;
-    resultImg: string;
-    summary: string;
-    ingredients: string[];
-    steps: string[];
-    tags: string[];
+interface RecipeProps extends RecipeInfo<WithStyles<typeof useStyles, true>>{
     invalid?: boolean;
 };
 interface RecipeState {
@@ -144,7 +141,7 @@ class RecipeLargeScreen extends React.Component<RecipeProps, RecipeState>{
                         <Typography variant="h4">{this.props.title}</Typography>
                         <div>
                             {this.props.tags.map((tag, i) => {
-                                return <TagChip label={tag} key={i} link={`/recipes?tags=${tag}`} className={this.classes.tag} />
+                                return <TagChip variant="link" label={tag} key={i} link={`/recipes?tags=${tag}`} className={this.classes.tag} />
                             })}
                         </div>
                         <div className={this.classes.recipeInfo}>
