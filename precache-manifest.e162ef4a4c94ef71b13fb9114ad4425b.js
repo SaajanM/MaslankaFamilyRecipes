@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2801c964cb26c27e37736949e4d8dcc0",
+    "revision": "179c56f85052d7555968c983593a451a",
     "url": "/MaslankaFamilyRecipes/index.html"
   },
   {
-    "revision": "0634267af7b38f36c811",
+    "revision": "951d8c342b44b1af3ecf",
     "url": "/MaslankaFamilyRecipes/static/css/2.cb2feb34.chunk.css"
   },
   {
-    "revision": "fe5775129a5babe1493f",
+    "revision": "c85a92583839cfc8b111",
     "url": "/MaslankaFamilyRecipes/static/css/main.ba2afbab.chunk.css"
   },
   {
-    "revision": "0634267af7b38f36c811",
-    "url": "/MaslankaFamilyRecipes/static/js/2.35ccee7d.chunk.js"
+    "revision": "951d8c342b44b1af3ecf",
+    "url": "/MaslankaFamilyRecipes/static/js/2.d80e1584.chunk.js"
   },
   {
     "revision": "2fc3b7b221c3ecb52fb12f003bd257df",
-    "url": "/MaslankaFamilyRecipes/static/js/2.35ccee7d.chunk.js.LICENSE.txt"
+    "url": "/MaslankaFamilyRecipes/static/js/2.d80e1584.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "fe5775129a5babe1493f",
-    "url": "/MaslankaFamilyRecipes/static/js/main.f727feae.chunk.js"
+    "revision": "c85a92583839cfc8b111",
+    "url": "/MaslankaFamilyRecipes/static/js/main.b983d400.chunk.js"
   },
   {
     "revision": "d26a752cff1af04aef84",
