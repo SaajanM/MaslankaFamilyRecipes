@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "/MaslankaFamilyRecipes/static/css/main.ba2afbab.chunk.css",
-    "main.js": "/MaslankaFamilyRecipes/static/js/main.b983d400.chunk.js",
-    "main.js.map": "/MaslankaFamilyRecipes/static/js/main.b983d400.chunk.js.map",
+    "main.js": "/MaslankaFamilyRecipes/static/js/main.95f750f7.chunk.js",
+    "main.js.map": "/MaslankaFamilyRecipes/static/js/main.95f750f7.chunk.js.map",
     "runtime-main.js": "/MaslankaFamilyRecipes/static/js/runtime-main.324f6970.js",
     "runtime-main.js.map": "/MaslankaFamilyRecipes/static/js/runtime-main.324f6970.js.map",
     "static/css/2.cb2feb34.chunk.css": "/MaslankaFamilyRecipes/static/css/2.cb2feb34.chunk.css",
-    "static/js/2.d80e1584.chunk.js": "/MaslankaFamilyRecipes/static/js/2.d80e1584.chunk.js",
-    "static/js/2.d80e1584.chunk.js.map": "/MaslankaFamilyRecipes/static/js/2.d80e1584.chunk.js.map",
+    "static/js/2.a5bfd0c7.chunk.js": "/MaslankaFamilyRecipes/static/js/2.a5bfd0c7.chunk.js",
+    "static/js/2.a5bfd0c7.chunk.js.map": "/MaslankaFamilyRecipes/static/js/2.a5bfd0c7.chunk.js.map",
     "index.html": "/MaslankaFamilyRecipes/index.html",
-    "precache-manifest.e162ef4a4c94ef71b13fb9114ad4425b.js": "/MaslankaFamilyRecipes/precache-manifest.e162ef4a4c94ef71b13fb9114ad4425b.js",
+    "precache-manifest.801a4d1929153a4a2d5e87a1dce86b71.js": "/MaslankaFamilyRecipes/precache-manifest.801a4d1929153a4a2d5e87a1dce86b71.js",
     "service-worker.js": "/MaslankaFamilyRecipes/service-worker.js",
     "static/css/2.cb2feb34.chunk.css.map": "/MaslankaFamilyRecipes/static/css/2.cb2feb34.chunk.css.map",
     "static/css/main.ba2afbab.chunk.css.map": "/MaslankaFamilyRecipes/static/css/main.ba2afbab.chunk.css.map",
-    "static/js/2.d80e1584.chunk.js.LICENSE.txt": "/MaslankaFamilyRecipes/static/js/2.d80e1584.chunk.js.LICENSE.txt",
+    "static/js/2.a5bfd0c7.chunk.js.LICENSE.txt": "/MaslankaFamilyRecipes/static/js/2.a5bfd0c7.chunk.js.LICENSE.txt",
     "static/media/breakfast-dining.81cd3f29.svg": "/MaslankaFamilyRecipes/static/media/breakfast-dining.81cd3f29.svg",
     "static/media/dinner-dining.7948474b.svg": "/MaslankaFamilyRecipes/static/media/dinner-dining.7948474b.svg",
     "static/media/filter-search.e7c31c44.svg": "/MaslankaFamilyRecipes/static/media/filter-search.e7c31c44.svg",
@@ -25,8 +25,8 @@
   "entrypoints": [
     "static/js/runtime-main.324f6970.js",
     "static/css/2.cb2feb34.chunk.css",
-    "static/js/2.d80e1584.chunk.js",
+    "static/js/2.a5bfd0c7.chunk.js",
     "static/css/main.ba2afbab.chunk.css",
-    "static/js/main.b983d400.chunk.js"
+    "static/js/main.95f750f7.chunk.js"
   ]
 }

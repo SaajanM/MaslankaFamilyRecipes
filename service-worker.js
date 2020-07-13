@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/MaslankaFamilyRecipes/precache-manifest.e162ef4a4c94ef71b13fb9114ad4425b.js"
+  "/MaslankaFamilyRecipes/precache-manifest.801a4d1929153a4a2d5e87a1dce86b71.js"
 );
 
 self.addEventListener('message', (event) => {
