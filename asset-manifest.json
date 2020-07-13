@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/MaslankaFamilyRecipes/static/css/main.ba2afbab.chunk.css",
-    "main.js": "/MaslankaFamilyRecipes/static/js/main.8b91dd9c.chunk.js",
-    "main.js.map": "/MaslankaFamilyRecipes/static/js/main.8b91dd9c.chunk.js.map",
+    "main.js": "/MaslankaFamilyRecipes/static/js/main.b983d400.chunk.js",
+    "main.js.map": "/MaslankaFamilyRecipes/static/js/main.b983d400.chunk.js.map",
     "runtime-main.js": "/MaslankaFamilyRecipes/static/js/runtime-main.324f6970.js",
     "runtime-main.js.map": "/MaslankaFamilyRecipes/static/js/runtime-main.324f6970.js.map",
     "static/css/2.cb2feb34.chunk.css": "/MaslankaFamilyRecipes/static/css/2.cb2feb34.chunk.css",
     "static/js/2.d80e1584.chunk.js": "/MaslankaFamilyRecipes/static/js/2.d80e1584.chunk.js",
     "static/js/2.d80e1584.chunk.js.map": "/MaslankaFamilyRecipes/static/js/2.d80e1584.chunk.js.map",
     "index.html": "/MaslankaFamilyRecipes/index.html",
-    "precache-manifest.b29b9155c6320b39cf7d55614647df72.js": "/MaslankaFamilyRecipes/precache-manifest.b29b9155c6320b39cf7d55614647df72.js",
+    "precache-manifest.e162ef4a4c94ef71b13fb9114ad4425b.js": "/MaslankaFamilyRecipes/precache-manifest.e162ef4a4c94ef71b13fb9114ad4425b.js",
     "service-worker.js": "/MaslankaFamilyRecipes/service-worker.js",
     "static/css/2.cb2feb34.chunk.css.map": "/MaslankaFamilyRecipes/static/css/2.cb2feb34.chunk.css.map",
     "static/css/main.ba2afbab.chunk.css.map": "/MaslankaFamilyRecipes/static/css/main.ba2afbab.chunk.css.map",
@@ -27,6 +27,6 @@
     "static/css/2.cb2feb34.chunk.css",
     "static/js/2.d80e1584.chunk.js",
     "static/css/main.ba2afbab.chunk.css",
-    "static/js/main.8b91dd9c.chunk.js"
+    "static/js/main.b983d400.chunk.js"
   ]
 }
