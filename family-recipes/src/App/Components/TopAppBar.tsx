@@ -36,11 +36,13 @@ const useStyles = (theme: Theme) => {
             flexGrow: 1,
             marginTop: '1.5px',
             marginBottom: '1.5px',
-            color: "inherit",
-            textDecoration: "none",
-            "&:visited": {
-                color: "inherit"
-            },
+            "& *":{
+                color: "inherit",
+                textDecoration: "none",
+                "&:visited": {
+                    color: "inherit"
+                },
+            }
         },
         appBar: {
             backgroundColor: theme.palette.background.default,
@@ -102,25 +104,25 @@ class TopAppBar extends React.Component<TopAppBarProps, TopAppBarState>{
                 <AppBar position="static" className={this.classes.appBar}>
                     <Toolbar>
                         <TemporaryDrawer anchor="left">
-                            <ListSubheader style={{display:((this.props.location.pathname === "/recipes")?"none":"inline-block")}} disableSticky={true}>Recipe Search</ListSubheader>
-                            <SearchBar style={{display:((this.props.location.pathname === "/recipes")?"none":"inline-block")}} type="fixed" placeholder="Search Recipes..."></SearchBar>
+                            <ListSubheader disableSticky={true}>Recipe Search</ListSubheader>
+                            <SearchBar type="fixed" placeholder="Search Recipes..."></SearchBar>
                             <ListSubheader disableSticky={true}>Quick Links</ListSubheader>
                             <List>
                                 <DrawerListIconItem title="Browse Recipes" icon={SortIcon} link="/recipes"></DrawerListIconItem>
-                                <DrawerListIconItem title="Recommended" icon={StarIcon} link="/recipes?tags=recommended"></DrawerListIconItem>
+                                <DrawerListIconItem title="Recommended" icon={StarIcon} link="/recipes?tags=Recommended"></DrawerListIconItem>
                                 <DrawerListIconItem title="Random Recipe" icon={CasinoIcon} onClick={()=>this.randomRecipe()}></DrawerListIconItem>
                             </List>
                             <ListSubheader disableSticky={true}>Meal Types</ListSubheader>
                             <List>
-                                <DrawerListIconItem title="Breakfasts" icon={BreakfastIcon} viewBox="0 0 512 512" link="/recipes?tags=breakfast"></DrawerListIconItem>
-                                <DrawerListIconItem title="Lunches" icon={LunchIcon} viewBox="0 0 512 512" link="/recipes?tags=lunch"></DrawerListIconItem>
-                                <DrawerListIconItem title="Dinners" icon={DinnerIcon} viewBox="0 0 512 512" link="/recipes?tags=dinner"></DrawerListIconItem>
-                                <DrawerListIconItem title="Desserts" icon={DessertIcon} viewBox="0 0 512 512" link="/recipes?tags=dessert"></DrawerListIconItem>
-                                <DrawerListIconItem title="Snacks" icon={SnackIcon} viewBox="0 0 24 24" link="/recipes?tags=snack"></DrawerListIconItem>
+                                <DrawerListIconItem title="Breakfasts" icon={BreakfastIcon} viewBox="0 0 512 512" link="/recipes?tags=Breakfast"></DrawerListIconItem>
+                                <DrawerListIconItem title="Lunches" icon={LunchIcon} viewBox="0 0 512 512" link="/recipes?tags=Lunch"></DrawerListIconItem>
+                                <DrawerListIconItem title="Dinners" icon={DinnerIcon} viewBox="0 0 512 512" link="/recipes?tags=Dinner"></DrawerListIconItem>
+                                <DrawerListIconItem title="Desserts" icon={DessertIcon} viewBox="0 0 512 512" link="/recipes?tags=Dessert"></DrawerListIconItem>
+                                <DrawerListIconItem title="Snacks" icon={SnackIcon} viewBox="0 0 24 24" link="/recipes?tags=Snack"></DrawerListIconItem>
                             </List>
                         </TemporaryDrawer>
-                        <Typography variant="h6" className={this.classes.title} component={Link} to="/">{this.props.title} </Typography>
-                        <SearchBar style={{display:((this.props.location.pathname === "/recipes")?"none":"inline-block")}} type="expandable" placeholder="Search Recipes..."></SearchBar>
+                        <Typography variant="h6" className={this.classes.title}><Link to="/">{this.props.title} </Link></Typography>
+                        <SearchBar type="expandable" placeholder="Search Recipes..."></SearchBar>
                     </Toolbar>
                 </AppBar>
 

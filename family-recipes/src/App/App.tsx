@@ -12,7 +12,6 @@ declare module "@material-ui/core/styles/createBreakpoints" {
   }
 }
 
-
 const TITLE = "Maslanka Family Recipes"
 let appTheme = createMuiTheme({
   palette: {

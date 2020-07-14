@@ -2,7 +2,7 @@ import React from 'react';
 import { createStyles, WithStyles, withStyles, Theme } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
-import { Redirect } from 'react-router';
+import { Redirect, RouteComponentProps, withRouter } from 'react-router';
 
 const useStyles = (theme: Theme) => {
     return createStyles({
@@ -69,7 +69,7 @@ const useStyles = (theme: Theme) => {
     });
 }
 
-interface SearchBarProps extends WithStyles<typeof useStyles> {
+type SearchBarProps = RouteComponentProps & WithStyles<typeof useStyles> & {
     placeholder: string;
     type: "expandable" | "fixed";
     callback?: (value: string) => void;
@@ -87,8 +87,26 @@ class SearchBar extends React.Component<SearchBarProps, SearchBarState>{
     constructor(props: SearchBarProps) {
         super(props);
         this.classes = this.props.classes;
-        let initialValue = this.props.initialValue?this.props.initialValue:"";
+        let initialValue = this.getInitialValue();
         this.state = { value: initialValue, submitted: false };
+    }
+    getInitialValue(): string{
+        let iV: string;
+        let sParams = new URLSearchParams(this.props.location.search);
+        let query = sParams.get('q');
+        if (this.props.initialValue) {
+            iV = this.props.initialValue
+        } else if (this.props.location.pathname === "/recipes" && query) {
+            iV = query;
+        } else {
+            iV = "";
+        }
+        return iV;
+    }
+    componentDidUpdate(prevProps: SearchBarProps){
+        if(this.props.location.pathname === prevProps.location.pathname && this.props.location.search !== prevProps.location.search){
+            this.setState({...this.state, value: this.getInitialValue()})
+        }
     }
     updateSearch(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) {
         if (this.props.callback) {
@@ -101,7 +119,7 @@ class SearchBar extends React.Component<SearchBarProps, SearchBarState>{
         if (this.props.callback) {
             this.props.callback(this.state.value);
             return false;
-        }else if (this.state.value !== "") {
+        } else if (this.state.value !== "") {
             this.setState({ ...this.state, submitted: true });
         }
         return false;
@@ -133,4 +151,4 @@ class SearchBar extends React.Component<SearchBarProps, SearchBarState>{
     }
 }
 
-export default withStyles(useStyles)(SearchBar);
+export default withRouter(withStyles(useStyles)(SearchBar));

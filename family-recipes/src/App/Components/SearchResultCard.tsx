@@ -49,7 +49,7 @@ const useStyles = (theme: Theme) => createStyles({
         marginRight: theme.spacing(1),
         marginTop: theme.spacing(1),
         position: "relative",
-        zIndex:999,
+        zIndex: 999,
     },
     "imageContainer": {
         flex: "30%",
@@ -109,16 +109,24 @@ const useStyles = (theme: Theme) => createStyles({
         right: 0,
     }
 });
-
-interface SearchResultProps extends WithStyles<typeof useStyles> {
+interface SearchResultPropsCommon extends WithStyles<typeof useStyles> {
+    className?: string;
+    htmlId?: string;
+}
+interface SearchResultPropsRecipeVariant extends SearchResultPropsCommon{
+    variant: "recipe";
     tags: RecipeTag[];
     title: string;
     id: string;
     resultImg: string;
     overview: string;
-    className?: string;
-    htmlId?: string;
 }
+interface SearchResultPropsMessageVariant extends SearchResultPropsCommon {
+    variant: "message";
+    message: string;
+    subMessage?: string;
+}
+type SearchResultProps = SearchResultPropsMessageVariant | SearchResultPropsRecipeVariant;
 
 class SearchResultCard extends React.Component<SearchResultProps>{
     private classes: Record<keyof ReturnType<typeof useStyles>, string>;
@@ -127,30 +135,49 @@ class SearchResultCard extends React.Component<SearchResultProps>{
         this.classes = this.props.classes;
     }
     render() {
-        return (
-            <Card className={`${this.classes.resultCard} ${this.props.className}`} id={this.props.htmlId}>
+        if (this.props.variant === "recipe") {
+            return (
+                <Card className={`${this.classes.resultCard} ${this.props.className}`} id={this.props.htmlId}>
+                    <CardContent className={this.classes.resultCardContent}>
+                        <div className={this.classes.info}>
+                            <Typography className={this.classes.title} variant="h5">{this.props.title}</Typography>
+                            <div className={this.classes.tags}>
+                                {this.props.tags.map((tag, i) => {
+                                    return <TagChip variant="link" label={tag} key={i} link={`/recipes?tags=${tag}`} className={this.classes.tag} />
+                                })}
+                            </div>
+                            <div className={this.classes.overviewContainer}>
+                                <Typography className={this.classes.overview}>{this.props.overview}</Typography>
+                            </div>
+                        </div>
+                        <div className={this.classes.imageContainer}>
+                            <div className={this.classes.imageContainer2}>
+                                <img className={this.classes.image} src={this.props.resultImg} alt={this.props.title + ".png"}></img>
+                            </div>
+                        </div>
+
+                    </CardContent>
+                    <Link className={this.classes.link} to={`/recipe/${this.props.id}`}></Link>
+                </Card>
+            );
+        }else if(this.props.variant === "message"){
+            return (
+                <Card className={`${this.classes.resultCard} ${this.props.className}`} id={this.props.htmlId}>
                 <CardContent className={this.classes.resultCardContent}>
                     <div className={this.classes.info}>
-                        <Typography className={this.classes.title} variant="h5">{this.props.title}</Typography>
-                        <div className={this.classes.tags}>
-                            {this.props.tags.map((tag, i) => {
-                                return <TagChip variant="link" label={tag} key={i} link={`/recipes?tags=${tag}`} className={this.classes.tag} />
-                            })}
-                        </div>
+                        <Typography className={this.classes.title} variant="h5">{this.props.message}</Typography>
                         <div className={this.classes.overviewContainer}>
-                            <Typography className={this.classes.overview}>{this.props.overview}</Typography>
+                            <Typography className={this.classes.overview}>{this.props.subMessage}</Typography>
                         </div>
                     </div>
                     <div className={this.classes.imageContainer}>
                         <div className={this.classes.imageContainer2}>
-                            <img className={this.classes.image} src={this.props.resultImg} alt={this.props.title + ".png"}></img>
                         </div>
                     </div>
-
                 </CardContent>
-                <Link className={this.classes.link} to={`/recipe/${this.props.id}`}></Link>
             </Card>
-        );
+            );
+        }
     }
 }
 

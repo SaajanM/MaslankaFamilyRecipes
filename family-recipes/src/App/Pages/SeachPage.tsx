@@ -153,8 +153,7 @@ const outerListRef = React.createRef<HTMLDivElement>();
 
 enum RedirectEnum {
     STAY,
-    UPDATE_SETTINGS,
-    UPDATE_TRIGGERED,
+    UPDATE_SETTINGS
 }
 
 type SearchPageProps = RouteComponentProps & WithStyles<typeof useStyles>;
@@ -173,7 +172,7 @@ class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
     private items: JSX.Element[];
     constructor(props: SearchPageProps) {
         super(props);
-        this.state = { selectedTags: new Set<RecipeTag>(), query: "", modalOpen: false, redirect: RedirectEnum.STAY, showReturnTop: false};
+        this.state = { selectedTags: new Set<RecipeTag>(), query: "", modalOpen: false, redirect: RedirectEnum.STAY, showReturnTop: false };
         this.classes = this.props.classes;
         this.items = [];
         this.unconfirmedSettings = { query: "", tags: new Set<RecipeTag>() };
@@ -183,9 +182,9 @@ class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
         this.updateQueries();
     }
 
-    componentDidUpdate() {
-        if (this.state.redirect === RedirectEnum.UPDATE_TRIGGERED) {
-            this.updateQueries({ redirect: RedirectEnum.STAY });
+    componentDidUpdate(prevProps: SearchPageProps) {
+        if (this.props.location.pathname === prevProps.location.pathname && this.props.location.search !== prevProps.location.search) {
+            this.updateQueries();
         }
     }
     componentWillUnmount() {
@@ -197,10 +196,9 @@ class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
         let tags = options.getAll('tags');
         let recipeTags = new Set(tags.filter(tag => isValidTag(tag)) as RecipeTag[]);
         let newState: SearchPageState = { ...this.state };
-        if (q) {
-            newState = { ...newState, query: q };
-            this.unconfirmedSettings.query = q;
-        }
+        if (!q) q = "";
+        newState = { ...newState, query: q };
+        this.unconfirmedSettings.query = q;
         if (recipeTags.size > 0) {
             newState = { ...newState, selectedTags: recipeTags };
             this.unconfirmedSettings.tags = recipeTags;
@@ -213,6 +211,7 @@ class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
                 if (this.resultHasTags(result, newState.selectedTags) && this.searchCompare(result, newState.query) > BASE_SIMILARITY) {
                     searchResults.add(
                         <SearchResultCard
+                            variant="recipe"
                             title={result.title}
                             id={result.id}
                             key={searchResults.size}
@@ -225,6 +224,19 @@ class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
             });
             pipeline.on('end', () => {
                 this.items = Array.from(searchResults);
+                if (this.items.length === 0) {
+                    this.items.push(<SearchResultCard
+                        variant="message"
+                        message="No Results Found"
+                        subMessage="Please change your filter or search to be more broad..."
+                    ></SearchResultCard>);
+                }else{
+                    this.items.push(<SearchResultCard
+                        variant="message"
+                        message="No More Results"
+                        subMessage={`You have reached the end of the results for this search and filter. Recipes listed: ${this.items.length}`}
+                    ></SearchResultCard>);
+                }
                 newState = { ...newState, ...additionalState };
                 this.setState(newState);
             })
@@ -247,9 +259,9 @@ class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
             currentSimilarity = this.stringSimilarity(tags[t], query);
             maxSimilarity = (currentSimilarity > maxSimilarity) ? currentSimilarity : maxSimilarity;
         }
-        let titleArray:string[] = [];
-        for(let i = 1; i < title.length; i ++){
-            titleArray.push(title.substring(0,i+1))
+        let titleArray: string[] = [];
+        for (let i = 1; i < title.length; i++) {
+            titleArray.push(title.substring(0, i + 1))
         }
         for (let t in titleArray) {
             currentSimilarity = this.stringSimilarity(titleArray[t], query);
@@ -313,17 +325,18 @@ class SearchPage extends React.Component<SearchPageProps, SearchPageState> {
     render() {
         if (this.state.redirect === RedirectEnum.UPDATE_SETTINGS) {
             let newQueryParams = new URLSearchParams();
-            newQueryParams.append("q", this.unconfirmedSettings.query);
+            if(this.unconfirmedSettings.query) newQueryParams.append("q", this.unconfirmedSettings.query);
             this.unconfirmedSettings.tags.forEach(value => {
                 newQueryParams.append("tags", value);
             });
-            this.setState({ ...this.state, redirect: RedirectEnum.UPDATE_TRIGGERED });
+            this.setState({ ...this.state, redirect: RedirectEnum.STAY });
             return <Redirect to={`/recipes?${newQueryParams.toString()}`} />;
         }
         return (
             <div className={this.classes.root} ref={topRef}>
                 <div className={this.classes.results}>
                     <SearchResultCard
+                        variant="recipe"
                         htmlId='calculatorResult'
                         className={`${this.classes.sampleResult} ${this.classes.result}`}
                         title="Sample"
