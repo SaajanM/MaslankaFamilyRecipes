@@ -172,6 +172,7 @@ class RecipeLargeScreen extends React.Component<RecipeProps, RecipeState>{
                                         axis={this.theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                                         index={this.state.currentTab}
                                         onChangeIndex={this.handleTabChangeIndex.bind(this)}
+                                        enableMouseEvents={true}
                                     >
                                         <TabPanel value={this.state.currentTab} index={0} dir={this.theme.direction}>
                                             <ul>
