@@ -1,12 +1,19 @@
 {
-    "short_name": "Family Recipes",
+    "short_name": "Maslanka Recipes",
     "name": "Maslanka Family Recipes",
     "icons": [{
-        "src": "favicon.png",
-        "type": "image/png"
-    }],
-    "start_url": ".",
+            "src": "/icons-192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "/icons-512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": "/",
     "display": "standalone",
-    "theme_color": "#000000",
-    "background_color": "#ffffff"
+    "theme_color": "#424242",
+    "background_color": "#303030"
 }
