@@ -1,0 +1,8 @@
+[{
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+        "namespace": "android_app",
+        "package_name": "com.maslankarecipes.recipes",
+        "sha256_cert_fingerprints": ["4B:B7:6C:24:83:5B:D5:A7:DC:B2:BB:93:F7:0F:A0:E0:9C:A9:7F:BD:C1:69:7E:F5:02:30:FF:F9:FD:46:66:D8"]
+    }
+}]
